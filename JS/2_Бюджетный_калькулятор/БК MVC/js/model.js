@@ -1,6 +1,7 @@
 // DATA
 const budget = [];
 
+// Функция, которая  формирует объект и добавляет в массив budget.
 function createRecord(formData) {
   // Расчет id
   let id = 1;
@@ -23,6 +24,7 @@ function createRecord(formData) {
   return record;
 }
 
+// Функция, которая  удаляет объект из массива budget.
 function deleteRecord(id) {
   const index = budget.findIndex(function (element) {
     if (+id === element.id) return true;
@@ -33,6 +35,7 @@ function deleteRecord(id) {
   // console.log(budget)
 }
 
+// Функция, которая расчитывает общий доход/расход.
 function calcBudget() {
   // Считаем общий доход
   const totalIncome = budget.reduce(function (total, element) {
@@ -45,7 +48,6 @@ function calcBudget() {
   const totalExpense = budget.reduce(function (total, element) {
     if (element.type === "exp") return total + element.value;
     else return total;
-    
   }, 0);
   // console.log("totalExpense", totalExpense);
 
@@ -53,7 +55,8 @@ function calcBudget() {
   // console.log("totalBudget", totalBudget);
 
   let expensePercents = 0;
-  if (totalIncome) expensePercents = Math.round((totalExpense * 100) / totalIncome);
+  if (totalIncome)
+    expensePercents = Math.round((totalExpense * 100) / totalIncome);
   // console.log("expensePercents", expensePercents);
 
   return {
@@ -75,7 +78,7 @@ function getTestData() {
     { type: "exp", title: "Транспорт", value: 200 },
     { type: "exp", title: "Квартира", value: 500 },
   ];
-  
+
   function getRandomInt(max) {
     return Math.floor(Math.random() * max);
   }
@@ -85,13 +88,14 @@ function getTestData() {
   return randomData;
 }
 
+// функция, вывода месяца на страницу.
 function displayMonth() {
   const now = new Date();
   const year = now.getFullYear(); // 2023
 
   const timeFormatter = new Intl.DateTimeFormat("ru-RU", { month: "long" });
   const month = timeFormatter.format(now);
-return {month, year};
+  return { month, year };
 }
 
-export { createRecord, deleteRecord, calcBudget, getTestData, displayMonth};
+export { createRecord, deleteRecord, calcBudget, getTestData, displayMonth };
